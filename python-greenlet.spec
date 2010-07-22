@@ -4,7 +4,7 @@
 
 Name:           python-greenlet
 Version:        0.3.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Lightweight in-process concurrent programming
 Group:          Development/Libraries
 License:        MIT
@@ -56,6 +56,9 @@ rm -rf %{buildroot}
 %{_includedir}/python*/greenlet
 
 %changelog
+* Thu Jul 22 2010 David Malcolm <dmalcolm@redhat.com> - 0.3.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Features/Python_2.7/MassRebuild
+
 * Wed Apr 14 2010 Lev Shamardin <shamardin@gmail.com> - 0.3.1-2
 - Splitted headers into a -devel package.
 
