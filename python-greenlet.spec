@@ -4,7 +4,7 @@
 
 Name:           python-greenlet
 Version:        0.3.1
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Lightweight in-process concurrent programming
 Group:          Development/Libraries
 License:        MIT
@@ -77,9 +77,14 @@ PYTHONPATH=$(pwd) %{__python} benchmarks/switch.py
 %{_includedir}/python*/greenlet
 
 %changelog
+* Thu Nov 17 2011 Pádraig Brady <P@draigBrady.com> - 0.3.1-7
+- Fix %%check quoting in the previous comment which when
+  left with a single percent sign, pulled in "unset DISPLAY\n"
+  into the changelog
+
 * Mon Oct 24 2011 Pádraig Brady <P@draigBrady.com> - 0.3.1-6
 - cherrypick 25bf29f4d3b7 from upstream (rhbz#746771)
-- exclude the %check from ppc where the tests segfault
+- exclude the %%check from ppc where the tests segfault
 
 * Wed Oct 19 2011 David Malcolm <dmalcolm@redhat.com> - 0.3.1-5
 - add a %%check section
