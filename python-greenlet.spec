@@ -4,7 +4,7 @@
 
 Name:           python-greenlet
 Version:        0.3.1
-Release:        7%{?dist}
+Release:        11%{?dist}
 Summary:        Lightweight in-process concurrent programming
 Group:          Development/Libraries
 License:        MIT
@@ -17,6 +17,9 @@ Patch1:         get-rid-of-ts_origin.patch
 # Apply https://bitbucket.org/ambroff/greenlet/changeset/25bf29f4d3b7
 # to fix the i686 crash in rhbz#746771
 Patch2:         i686-register-fixes.patch
+# Backport https://github.com/python-greenlet/greenlet/commit/b17773a7
+# from greenlet 0.4.0 to support ppc64
+Patch3:         ppc64-support.patch
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -41,6 +44,7 @@ This package contains header files required for C modules development.
 %setup -q -n greenlet-%{version}
 %patch1 -p1 -b .get-rid-of-ts_origin
 %patch2 -p1 -b .i686_register_fixes
+%patch3 -p1 -b .ppc64_support
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" %{__python} setup.py build
@@ -54,9 +58,9 @@ rm -rf %{buildroot}
 rm -rf %{buildroot}
 
 # FIXME!!
-# The checks segfault on ppc64. So this arch
+# The checks segfault on ppc. So this arch
 # is essentially not supported until this is fixed
-%ifnarch ppc ppc64
+%ifnarch ppc s390 s390x
 %check
 # Run the upstream test suite:
 %{__python} setup.py test
@@ -77,6 +81,18 @@ PYTHONPATH=$(pwd) %{__python} benchmarks/switch.py
 %{_includedir}/python*/greenlet
 
 %changelog
+* Thu Oct 11 2012 Pádraig Brady <P@draigBrady.com> - 0.3.1-11
+- Add support for ppc64
+
+* Sat Jul 21 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3.1-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
+* Sat Jan 14 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3.1-9
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
+* Fri Nov 25 2011 Dan Horák <dan[at]danny.cz> - 0.3.1-8
+- disable tests also for s390(x)
+
 * Thu Nov 17 2011 Pádraig Brady <P@draigBrady.com> - 0.3.1-7
 - Fix %%check quoting in the previous comment which when
   left with a single percent sign, pulled in "unset DISPLAY\n"
