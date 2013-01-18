@@ -4,7 +4,7 @@
 
 Name:           python-greenlet
 Version:        0.3.1
-Release:        11%{?dist}
+Release:        12%{?dist}
 Summary:        Lightweight in-process concurrent programming
 Group:          Development/Libraries
 License:        MIT
@@ -20,6 +20,9 @@ Patch2:         i686-register-fixes.patch
 # Backport https://github.com/python-greenlet/greenlet/commit/b17773a7
 # from greenlet 0.4.0 to support ppc64
 Patch3:         ppc64-support.patch
+# Backport https://github.com/python-greenlet/greenlet/commit/2f81f5d
+# from greenlet 0.3.2 to fix http://pad.lv/1097203
+Patch4:         base-exception.patch
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -45,6 +48,7 @@ This package contains header files required for C modules development.
 %patch1 -p1 -b .get-rid-of-ts_origin
 %patch2 -p1 -b .i686_register_fixes
 %patch3 -p1 -b .ppc64_support
+%patch4 -p1 -b .base_exception
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" %{__python} setup.py build
@@ -81,6 +85,9 @@ PYTHONPATH=$(pwd) %{__python} benchmarks/switch.py
 %{_includedir}/python*/greenlet
 
 %changelog
+* Fri Jan 18 2013 Pádraig Brady <P@draigBrady.com> - 0.3.1-12
+- Fix base exception type thrown
+
 * Thu Oct 11 2012 Pádraig Brady <P@draigBrady.com> - 0.3.1-11
 - Add support for ppc64
 
