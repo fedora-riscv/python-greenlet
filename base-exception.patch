@@ -1,0 +1,34 @@
+wget https://github.com/python-greenlet/greenlet/commit/2f81f5d.patch
+
+From 2f81f5de275c8dad13c5497c540ab96952a24071 Mon Sep 17 00:00:00 2001
+From: Alexey Borzenkov <snaury@gmail.com>
+Date: Mon, 28 Feb 2011 00:48:00 +0300
+Subject: [PATCH] Make GreenletExit based on BaseException on Python >= 2.5
+
+This way it is more similar to SystemExit and becomes a little
+harder to accidentally catch with "except Exception:" statement.
+---
+ greenlet.c |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/greenlet.c b/greenlet.c
+index 25358ce..973a12c 100755
+--- a/greenlet.c
++++ b/greenlet.c
+@@ -1266,8 +1266,13 @@ void initgreenlet(void)
+ 	{
+ 		INITERROR;
+ 	}
++#if PY_MAJOR_VERSION >= 3 || (PY_MAJOR_VERSION == 2 && PY_MINOR_VERSION >= 5)
++	PyExc_GreenletExit = PyErr_NewException("greenlet.GreenletExit",
++						PyExc_BaseException, NULL);
++#else
+ 	PyExc_GreenletExit = PyErr_NewException("greenlet.GreenletExit",
+ 						NULL, NULL);
++#endif
+ 	if (PyExc_GreenletExit == NULL)
+ 	{
+ 		INITERROR;
+-- 
+1.7.10
+
