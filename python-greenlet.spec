@@ -3,26 +3,13 @@
 %{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
 
 Name:           python-greenlet
-Version:        0.3.1
-Release:        12%{?dist}
+Version:        0.4.2
+Release:        1%{?dist}
 Summary:        Lightweight in-process concurrent programming
 Group:          Development/Libraries
 License:        MIT
 URL:            http://pypi.python.org/pypi/greenlet
-Source0:        http://pypi.python.org/packages/source/g/greenlet/greenlet-%{version}.tar.gz
-
-# Based on https://bitbucket.org/ambroff/greenlet/changeset/2d5b17472757
-# slightly fixed up to apply cleanly. Avoid rhbz#746771
-Patch1:         get-rid-of-ts_origin.patch
-# Apply https://bitbucket.org/ambroff/greenlet/changeset/25bf29f4d3b7
-# to fix the i686 crash in rhbz#746771
-Patch2:         i686-register-fixes.patch
-# Backport https://github.com/python-greenlet/greenlet/commit/b17773a7
-# from greenlet 0.4.0 to support ppc64
-Patch3:         ppc64-support.patch
-# Backport https://github.com/python-greenlet/greenlet/commit/2f81f5d
-# from greenlet 0.3.2 to fix http://pad.lv/1097203
-Patch4:         base-exception.patch
+Source0:        http://pypi.python.org/packages/source/g/greenlet/greenlet-%{version}.zip
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -45,10 +32,6 @@ This package contains header files required for C modules development.
 
 %prep
 %setup -q -n greenlet-%{version}
-%patch1 -p1 -b .get-rid-of-ts_origin
-%patch2 -p1 -b .i686_register_fixes
-%patch3 -p1 -b .ppc64_support
-%patch4 -p1 -b .base_exception
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" %{__python} setup.py build
@@ -71,12 +54,11 @@ rm -rf %{buildroot}
 
 # Run the upstream benchmarking suite to further exercise the code:
 PYTHONPATH=$(pwd) %{__python} benchmarks/chain.py
-PYTHONPATH=$(pwd) %{__python} benchmarks/switch.py
 %endif
 
 %files
 %defattr(-,root,root,-)
-%doc doc/greenlet.txt README benchmarks AUTHORS NEWS
+%doc doc/greenlet.txt README.rst benchmarks AUTHORS NEWS
 %{python_sitearch}/greenlet.so
 %{python_sitearch}/greenlet*.egg-info
 
@@ -85,6 +67,9 @@ PYTHONPATH=$(pwd) %{__python} benchmarks/switch.py
 %{_includedir}/python*/greenlet
 
 %changelog
+* Thu Jan 23 2014 Orion Poplawski <orion@cora.nwra.com> 0.4.2-1
+- Update to 0.4.2
+
 * Fri Jan 18 2013 Pádraig Brady <P@draigBrady.com> - 0.3.1-12
 - Fix base exception type thrown
 
