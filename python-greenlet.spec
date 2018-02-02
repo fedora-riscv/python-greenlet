@@ -1,7 +1,7 @@
 %global         modname greenlet
 
 Name:           python-%{modname}
-Version:        0.4.12
+Version:        0.4.13
 Release:        1%{?dist}
 Summary:        Lightweight in-process concurrent programming
 License:        MIT
@@ -92,6 +92,9 @@ Python 3 version.
 %{_includedir}/python%{python3_version}*/%{modname}/
 
 %changelog
+* Fri Feb 02 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 0.4.13-1
+- Update to 0.4.13
+
 * Fri Jan 12 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 0.4.12-1
 - Update to 0.4.12
 
