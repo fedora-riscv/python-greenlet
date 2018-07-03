@@ -2,13 +2,16 @@
 
 Name:           python-%{modname}
 Version:        0.4.13
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Lightweight in-process concurrent programming
 License:        MIT
 URL:            https://github.com/python-greenlet/greenlet
 Source0:        %{url}/archive/%{version}/%{modname}-%{version}.tar.gz
 # https://github.com/python-greenlet/greenlet/pull/120
 Patch0001:      0001-Don-t-clobber-r2-register-on-ppc64el.patch
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=1594248
+Patch0002:      https://github.com/python-greenlet/greenlet/pull/132.patch
 
 %global _description \
 The greenlet package is a spin-off of Stackless, a version of CPython\
@@ -92,6 +95,9 @@ Python 3 version.
 %{_includedir}/python%{python3_version}*/%{modname}/
 
 %changelog
+* Tue Jul 03 2018 Miro Hrončok <mhroncok@redhat.com> - 0.4.13-4
+- Add fix for Python 3.7
+
 * Sat Jun 16 2018 Miro Hrončok <mhroncok@redhat.com> - 0.4.13-3
 - Rebuilt for Python 3.7
 
