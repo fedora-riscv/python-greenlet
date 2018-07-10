@@ -13,6 +13,8 @@ Patch0001:      0001-Don-t-clobber-r2-register-on-ppc64el.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1594248
 Patch0002:      https://github.com/python-greenlet/greenlet/pull/132.patch
 
+BuildRequires:  gcc
+
 %global _description \
 The greenlet package is a spin-off of Stackless, a version of CPython\
 that supports micro-threads called "tasklets". Tasklets run\
