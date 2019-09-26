@@ -2,7 +2,7 @@
 
 Name:           python-%{modname}
 Version:        0.4.14
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Lightweight in-process concurrent programming
 License:        MIT
 URL:            https://github.com/python-greenlet/greenlet
@@ -17,16 +17,6 @@ and are synchronized with data exchanges on "channels".
 
 %description %{_description}
 
-%package -n     python2-%{modname}
-Summary:        %{summary}
-%{?python_provide:%python_provide python2-%{modname}}
-BuildRequires:  python2-devel
-BuildRequires:  python2-setuptools
-
-%description -n python2-%{modname} %{_description}
-
-Python 2 version.
-
 %package -n     python3-%{modname}
 Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{modname}}
@@ -36,16 +26,6 @@ BuildRequires:  python3-setuptools
 %description -n python3-%{modname} %{_description}
 
 Python 3 version.
-
-%package -n     python2-%{modname}-devel
-Summary:        C development headers for python2-%{modname}
-%{?python_provide:%python_provide python2-%{modname}-devel}
-Requires:       python2-%{modname}%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
-
-%description -n python2-%{modname}-devel
-%{summary}.
-
-Python 2 version.
 
 %package -n     python3-%{modname}-devel
 Summary:        C development headers for python3-%{modname}
@@ -61,25 +41,13 @@ Python 3 version.
 %autosetup -n %{modname}-%{version} -p1
 
 %build
-%py2_build
 %py3_build
 
 %install
-%py2_install
 %py3_install
  
 %check
-%{__python2} setup.py test
 %{__python3} setup.py test
-
-%files -n python2-%{modname}
-%license LICENSE LICENSE.PSF
-%doc AUTHORS NEWS README.rst
-%{python2_sitearch}/%{modname}-*.egg-info
-%{python2_sitearch}/%{modname}.so
-
-%files -n python2-%{modname}-devel
-%{_includedir}/python%{python2_version}*/%{modname}/
 
 %files -n python3-%{modname}
 %license LICENSE LICENSE.PSF
@@ -91,6 +59,10 @@ Python 3 version.
 %{_includedir}/python%{python3_version}*/%{modname}/
 
 %changelog
+* Thu Sep 26 2019 Miro Hrončok <mhroncok@redhat.com> - 0.4.14-5
+- Subpackages python2-greenlet, python2-greenlet-devel have been removed
+  See https://fedoraproject.org/wiki/Changes/Mass_Python_2_Package_Removal
+
 * Fri Aug 16 2019 Miro Hrončok <mhroncok@redhat.com> - 0.4.14-4
 - Rebuilt for Python 3.8
 
