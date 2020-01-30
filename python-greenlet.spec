@@ -2,7 +2,7 @@
 
 Name:           python-%{modname}
 Version:        0.4.14
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Lightweight in-process concurrent programming
 License:        MIT
 URL:            https://github.com/python-greenlet/greenlet
@@ -59,6 +59,9 @@ Python 3 version.
 %{_includedir}/python%{python3_version}*/%{modname}/
 
 %changelog
+* Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.4.14-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Thu Sep 26 2019 Miro Hrončok <mhroncok@redhat.com> - 0.4.14-5
 - Subpackages python2-greenlet, python2-greenlet-devel have been removed
   See https://fedoraproject.org/wiki/Changes/Mass_Python_2_Package_Removal
