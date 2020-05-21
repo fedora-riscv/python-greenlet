@@ -9,6 +9,8 @@ URL:            https://github.com/python-greenlet/greenlet
 Source0:        %{url}/archive/%{version}/%{modname}-%{version}.tar.gz
 BuildRequires:  gcc-c++
 
+Patch1:         %{url}/commit/c644ca6823994b958e004b3e00b587723181b58e.patch
+
 %global _description \
 The greenlet package is a spin-off of Stackless, a version of CPython\
 that supports micro-threads called "tasklets". Tasklets run\
