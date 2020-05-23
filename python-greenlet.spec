@@ -2,7 +2,7 @@
 
 Name:           python-%{modname}
 Version:        0.4.14
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        Lightweight in-process concurrent programming
 License:        MIT
 URL:            https://github.com/python-greenlet/greenlet
@@ -60,6 +60,9 @@ Python 3 version.
 %{_includedir}/python%{python3_version}*/%{modname}/
 
 %changelog
+* Sat May 23 2020 Miro Hrončok <mhroncok@redhat.com> - 0.4.14-8
+- Rebuilt for Python 3.9
+
 * Thu May 21 2020 Miro Hrončok <mhroncok@redhat.com> - 0.4.14-7
 - Fix Python 3.9 build
 
