@@ -1,14 +1,13 @@
 %global         modname greenlet
 
 Name:           python-%{modname}
-Version:        0.4.14
-Release:        8%{?dist}
+Version:        0.4.16
+Release:        1%{?dist}
 Summary:        Lightweight in-process concurrent programming
 License:        MIT
 URL:            https://github.com/python-greenlet/greenlet
 Source0:        %{url}/archive/%{version}/%{modname}-%{version}.tar.gz
 BuildRequires:  gcc-c++
-Patch1:         %{url}/commit/c644ca6823994b958e004b3e00b587723181b58e.patch
 
 %global _description \
 The greenlet package is a spin-off of Stackless, a version of CPython\
@@ -60,6 +59,9 @@ Python 3 version.
 %{_includedir}/python%{python3_version}*/%{modname}/
 
 %changelog
+* Sat Jun 06 2020 Orion Poplawski <orion@nwra.com> - 0.4.16-1
+- Update to 0.4.16
+
 * Sat May 23 2020 Miro Hrončok <mhroncok@redhat.com> - 0.4.14-8
 - Rebuilt for Python 3.9
 
