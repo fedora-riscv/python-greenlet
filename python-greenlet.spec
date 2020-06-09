@@ -47,7 +47,7 @@ Python 3 version.
 %py3_install
  
 %check
-%{__python3} setup.py test
+%{__python3} run-tests.py
 
 %files -n python3-%{modname}
 %license LICENSE LICENSE.PSF
