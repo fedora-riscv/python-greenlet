@@ -1,8 +1,8 @@
 %global         modname greenlet
 
 Name:           python-%{modname}
-Version:        0.4.16
-Release:        2%{?dist}
+Version:        0.4.17
+Release:        1%{?dist}
 Summary:        Lightweight in-process concurrent programming
 License:        MIT
 URL:            https://github.com/python-greenlet/greenlet
@@ -59,6 +59,9 @@ Python 3 version.
 %{_includedir}/python%{python3_version}*/%{modname}/
 
 %changelog
+* Sat Oct 31 2020 Kevin Fenzi <kevin@scrye.com> - 0.4.17-1
+- Update to 0.4.17. Fixes bug #1881455
+
 * Wed Jul 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.4.16-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
