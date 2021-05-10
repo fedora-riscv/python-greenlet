@@ -1,8 +1,8 @@
 %global         modname greenlet
 
 Name:           python-%{modname}
-Version:        0.4.17
-Release:        2%{?dist}
+Version:        1.1.0
+Release:        1%{?dist}
 Summary:        Lightweight in-process concurrent programming
 License:        MIT
 URL:            https://github.com/python-greenlet/greenlet
@@ -47,18 +47,21 @@ Python 3 version.
 %py3_install
  
 %check
-%{__python3} run-tests.py
+PYTHONPATH="%{buildroot}%{python3_sitearch}" %{python3} -m unittest discover greenlet.tests
 
 %files -n python3-%{modname}
 %license LICENSE LICENSE.PSF
-%doc AUTHORS NEWS README.rst
+%doc AUTHORS README.rst
 %{python3_sitearch}/%{modname}-*.egg-info
-%{python3_sitearch}/%{modname}*.so
+%{python3_sitearch}/%{modname}
 
 %files -n python3-greenlet-devel
 %{_includedir}/python%{python3_version}*/%{modname}/
 
 %changelog
+* Mon May 10 2021 Nils Philippsen <nils@tiptoe.de> - 1.1.0-1
+- Update to 1.1.0
+
 * Wed Jan 27 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.4.17-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
