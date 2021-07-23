@@ -2,7 +2,7 @@
 
 Name:           python-%{modname}
 Version:        1.1.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Lightweight in-process concurrent programming
 License:        MIT
 URL:            https://github.com/python-greenlet/greenlet
@@ -59,6 +59,9 @@ PYTHONPATH="%{buildroot}%{python3_sitearch}" %{python3} -m unittest discover gre
 %{_includedir}/python%{python3_version}*/%{modname}/
 
 %changelog
+* Fri Jul 23 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
 * Thu Jun 03 2021 Python Maint <python-maint@redhat.com> - 1.1.0-2
 - Rebuilt for Python 3.10
 
