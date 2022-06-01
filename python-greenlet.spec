@@ -2,11 +2,19 @@
 
 Name:           python-%{modname}
 Version:        1.1.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Lightweight in-process concurrent programming
 License:        MIT
 URL:            https://github.com/python-greenlet/greenlet
 Source0:        %{url}/archive/%{version}/%{modname}-%{version}.tar.gz
+
+# Python 3.11 support, backported from 2.0.0a2
+# https://github.com/python-greenlet/greenlet/commit/fd0b68ab406a0dfe3d6d0d8c9d17354356f53da0
+# https://github.com/python-greenlet/greenlet/commit/63e1099acc3677e614532bea0fa2e1967b69125f
+# https://github.com/python-greenlet/greenlet/commit/5ed467e5cb34651cc013c286158d0b6d7ff0a26a
+# Proposed upstream via https://github.com/python-greenlet/greenlet/pull/306
+Patch:          https://github.com/python-greenlet/greenlet/pull/306.patch
+
 BuildRequires:  gcc-c++
 
 %global _description \
@@ -59,6 +67,10 @@ PYTHONPATH="%{buildroot}%{python3_sitearch}" %{python3} -m unittest discover gre
 %{_includedir}/python%{python3_version}*/%{modname}/
 
 %changelog
+* Wed Jun 01 2022 Miro Hrončok <mhroncok@redhat.com> - 1.1.2-3
+- Python 3.11 support
+- Fixes: rhbz#2040186
+
 * Fri Jan 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
