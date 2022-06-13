@@ -2,7 +2,7 @@
 
 Name:           python-%{modname}
 Version:        1.1.2
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Lightweight in-process concurrent programming
 License:        MIT
 URL:            https://github.com/python-greenlet/greenlet
@@ -67,6 +67,9 @@ PYTHONPATH="%{buildroot}%{python3_sitearch}" %{python3} -m unittest discover gre
 %{_includedir}/python%{python3_version}*/%{modname}/
 
 %changelog
+* Mon Jun 13 2022 Python Maint <python-maint@redhat.com> - 1.1.2-4
+- Rebuilt for Python 3.11
+
 * Wed Jun 01 2022 Miro Hrončok <mhroncok@redhat.com> - 1.1.2-3
 - Python 3.11 support
 - Fixes: rhbz#2040186
