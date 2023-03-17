@@ -1,12 +1,12 @@
-From 75925bfb4988cb37332d58fc895e29da1c122cd1 Mon Sep 17 00:00:00 2001
+From 6d2e3a9e8d5ca1e735301824fd2a7136db9eeb81 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Tom=C3=A1=C5=A1=20Hrn=C4=8Diar?= <thrnciar@redhat.com>
-Date: Mon, 13 Mar 2023 16:26:07 +0100
+Date: Fri, 17 Mar 2023 11:59:10 +0100
 Subject: [PATCH] Rename recursion limits to add compatibility with Python 3.12
 
 ---
  src/greenlet/greenlet.c | 19 ++++++++++++++++---
- src/greenlet/greenlet.h |  7 ++++++-
- 2 files changed, 22 insertions(+), 4 deletions(-)
+ src/greenlet/greenlet.h |  6 ++++++
+ 2 files changed, 22 insertions(+), 3 deletions(-)
 
 diff --git a/src/greenlet/greenlet.c b/src/greenlet/greenlet.c
 index 2f3ad6e..6165064 100644
@@ -53,23 +53,22 @@ index 2f3ad6e..6165064 100644
                               - PyThreadState_GET()->recursion_remaining);
  #else
 diff --git a/src/greenlet/greenlet.h b/src/greenlet/greenlet.h
-index c788b2f..9e1caab 100644
+index c788b2f..e20c580 100644
 --- a/src/greenlet/greenlet.h
 +++ b/src/greenlet/greenlet.h
-@@ -20,7 +20,12 @@ extern "C" {
- #  include <internal/pycore_frame.h>
- #else
- #  define GREENLET_PY311 0
--#  define _PyCFrame CFrame
-+#endif
-+
+@@ -23,6 +23,12 @@ extern "C" {
+ #  define _PyCFrame CFrame
+ #endif
+ 
 +#if PY_VERSION_HEX >= 0x30C00A6
 +#  define GREENLET_PY312 1
 +#else
 +#  define GREENLET_PY312 0
- #endif
- 
++#endif
++
  typedef struct _greenlet {
+     PyObject_HEAD
+     char* stack_start;
 -- 
 2.38.1
 
