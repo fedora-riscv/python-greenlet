@@ -23,10 +23,7 @@ and are synchronized with data exchanges on "channels".
 
 %package -n     python3-%{modname}
 Summary:        %{summary}
-%{?python_provide:%python_provide python3-%{modname}}
 BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-
 # For tests
 BuildRequires:  python3-psutil
 
@@ -36,7 +33,6 @@ Python 3 version.
 
 %package -n     python3-%{modname}-devel
 Summary:        C development headers for python3-%{modname}
-%{?python_provide:%python_provide python3-%{modname}-devel}
 Requires:       python3-%{modname}%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
 
 %description -n python3-%{modname}-devel
@@ -47,12 +43,16 @@ Python 3 version.
 %prep
 %autosetup -n %{modname}-3.0.0rc1 -p1
 
+%generate_buildrequires
+%pyproject_buildrequires
+
 %build
-%py3_build
+%pyproject_wheel
 
 %install
-%py3_install
- 
+%pyproject_install
+%pyproject_save_files %{modname}
+
 %check
 cd /
 PYTHONPATH="%{buildroot}%{python3_sitearch}" \
@@ -60,11 +60,8 @@ PYTHONPATH="%{buildroot}%{python3_sitearch}" \
   -s "%{buildroot}%{python3_sitearch}/greenlet/tests" \
   -t "%{buildroot}%{python3_sitearch}"
 
-%files -n python3-%{modname}
-%license LICENSE LICENSE.PSF
+%files -n python3-%{modname} -f %{pyproject_files}
 %doc AUTHORS README.rst
-%{python3_sitearch}/%{modname}-*.egg-info
-%{python3_sitearch}/%{modname}
 
 %files -n python3-greenlet-devel
 %{_includedir}/python%{python3_version}*/%{modname}/
@@ -72,6 +69,7 @@ PYTHONPATH="%{buildroot}%{python3_sitearch}" \
 %changelog
 * Wed Sep 06 2023 Carl George <carlwgeorge@fedoraproject.org> - 3.0.0~rc1-1
 - Update to version 3.0.0rc1
+- Convert to pyproject macros
 
 * Sun Aug 13 2023 Orion Poplawski <orion@nwra.com> - 3.0.0~a1-1
 - Update to 3.0.0a1
