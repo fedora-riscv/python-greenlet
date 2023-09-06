@@ -1,12 +1,12 @@
 %global         modname greenlet
 
 Name:           python-%{modname}
-Version:        3.0.0~a1
+Version:        3.0.0~rc1
 Release:        1%{?dist}
 Summary:        Lightweight in-process concurrent programming
 License:        MIT AND PSF-2.0
 URL:            https://github.com/python-greenlet/greenlet
-Source0:        %{url}/archive/3.0.0a1/%{modname}-3.0.0a1.tar.gz
+Source0:        %{url}/archive/3.0.0rc1/%{modname}-3.0.0rc1.tar.gz
 
 # Skip leak checking to avoid a missing dependency, `objgraph`
 Patch:          skip-leak-checks.patch
@@ -45,7 +45,7 @@ Requires:       python3-%{modname}%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{rel
 Python 3 version.
 
 %prep
-%autosetup -n %{modname}-3.0.0a1 -p1
+%autosetup -n %{modname}-3.0.0rc1 -p1
 
 %build
 %py3_build
@@ -70,6 +70,9 @@ PYTHONPATH="%{buildroot}%{python3_sitearch}" \
 %{_includedir}/python%{python3_version}*/%{modname}/
 
 %changelog
+* Wed Sep 06 2023 Carl George <carlwgeorge@fedoraproject.org> - 3.0.0~rc1-1
+- Update to version 3.0.0rc1
+
 * Sun Aug 13 2023 Orion Poplawski <orion@nwra.com> - 3.0.0~a1-1
 - Update to 3.0.0a1
 
