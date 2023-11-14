@@ -1,8 +1,13 @@
 %global         modname greenlet
 
+%ifarch riscv64
+# to avoid compile time errors
+%undefine _include_frame_pointers
+%endif
+
 Name:           python-%{modname}
 Version:        3.0.0
-Release:        1%{?dist}
+Release:        1.0.riscv64%{?dist}
 Summary:        Lightweight in-process concurrent programming
 License:        MIT AND PSF-2.0
 URL:            https://github.com/python-greenlet/greenlet
@@ -67,6 +72,9 @@ PYTHONPATH="%{buildroot}%{python3_sitearch}" \
 %{_includedir}/python%{python3_version}*/%{modname}/
 
 %changelog
+* Mon Nov 14 2023 David Abdurachmanov <davidlt@rivosinc.com> - 3.0.0-1.0.riscv64
+- Undefine _include_frame_pointers for riscv64
+
 * Sat Oct 14 2023 Terje Rosten <terje.rosten@ntnu.no> - 3.0.0-1
 - 3.0.0
 
