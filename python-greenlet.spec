@@ -6,7 +6,7 @@
 %endif
 
 Name:           python-%{modname}
-Version:        3.0.0
+Version:        3.0.2
 Release:        1.0.riscv64%{?dist}
 Summary:        Lightweight in-process concurrent programming
 License:        MIT AND PSF-2.0
@@ -72,8 +72,14 @@ PYTHONPATH="%{buildroot}%{python3_sitearch}" \
 %{_includedir}/python%{python3_version}*/%{modname}/
 
 %changelog
-* Mon Nov 14 2023 David Abdurachmanov <davidlt@rivosinc.com> - 3.0.0-1.0.riscv64
+* Wed Dec 13 2023 David Abdurachmanov <davidlt@rivosinc.com> - 3.0.2-1.0.riscv64
 - Undefine _include_frame_pointers for riscv64
+
+* Mon Dec 11 2023 Terje Rosten <terje.rosten@ntnu.no> - 3.0.2-1
+- 3.0.2
+
+* Sat Nov 25 2023 Terje Rosten <terje.rosten@ntnu.no> - 3.0.1-1
+- 3.0.1
 
 * Sat Oct 14 2023 Terje Rosten <terje.rosten@ntnu.no> - 3.0.0-1
 - 3.0.0
